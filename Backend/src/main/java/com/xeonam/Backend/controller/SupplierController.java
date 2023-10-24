@@ -5,9 +5,13 @@ import com.xeonam.Backend.model.Supplier;
 import com.xeonam.Backend.repository.SupplierRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class SupplierController {
@@ -25,5 +29,14 @@ public class SupplierController {
         Supplier newSupplier = modelMapper.map(newSupplierDto, Supplier.class);
         Supplier savedSupplier = supplierRepository.save(newSupplier);
         return modelMapper.map(savedSupplier, SupplierDto.class);
+    }
+
+    @GetMapping("/suppliers")
+    public List<SupplierDto> getAllSuppliers(){
+        List<Supplier> suppliers = supplierRepository.findAll();
+        List<SupplierDto> supplierDtos = suppliers.stream()
+                .map(supplier -> modelMapper.map(supplier, SupplierDto.class))
+                .collect(Collectors.toList());
+        return supplierDtos;
     }
 }

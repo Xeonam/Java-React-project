@@ -5,9 +5,13 @@ import com.xeonam.Backend.model.Fruit;
 import com.xeonam.Backend.repository.FruitRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class FruitController {
@@ -26,6 +30,15 @@ public class FruitController {
         Fruit newFruit = modelMapper.map(newFruitDto, Fruit.class);
         Fruit savedFruit = fruitRepository.save(newFruit);
         return modelMapper.map(savedFruit, FruitDto.class);
+    }
+
+    @GetMapping("/fruits")
+    public List<FruitDto> getAllFruits() {
+        List<Fruit> fruits = fruitRepository.findAll();
+        List<FruitDto> fruitDTOs = fruits.stream()
+                .map(fruit -> modelMapper.map(fruit, FruitDto.class))
+                .collect(Collectors.toList());
+        return fruitDTOs;
     }
 
 }
