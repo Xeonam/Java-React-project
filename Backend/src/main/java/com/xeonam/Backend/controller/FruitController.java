@@ -5,10 +5,9 @@ import com.xeonam.Backend.model.Fruit;
 import com.xeonam.Backend.repository.FruitRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +38,16 @@ public class FruitController {
                 .map(fruit -> modelMapper.map(fruit, FruitDto.class))
                 .collect(Collectors.toList());
         return fruitDTOs;
+    }
+
+    @DeleteMapping("/deletefruit/{id}")
+    public ResponseEntity<String> deleteFruit(@PathVariable Long id) {
+        if (fruitRepository.existsById(id)) {
+            fruitRepository.deleteById(id);
+            return ResponseEntity.ok("Fruit deleted, id:  " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no fruit with the id: " + id);
+        }
     }
 
 }

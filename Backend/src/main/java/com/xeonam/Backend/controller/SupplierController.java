@@ -5,10 +5,9 @@ import com.xeonam.Backend.model.Supplier;
 import com.xeonam.Backend.repository.SupplierRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,4 +38,14 @@ public class SupplierController {
                 .collect(Collectors.toList());
         return supplierDtos;
     }
+
+    @DeleteMapping("/deletesupplier/{id}")
+    public ResponseEntity<String> deleteSupplier(@PathVariable Long id) {
+        if (supplierRepository.existsById(id)) {
+            supplierRepository.deleteById(id);
+            return ResponseEntity.ok("Supplier deleted, id:  " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no supplier with the id: " + id);}
+    }
+
 }
