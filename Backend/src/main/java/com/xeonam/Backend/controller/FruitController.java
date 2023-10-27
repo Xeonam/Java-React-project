@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,4 +51,23 @@ public class FruitController {
         }
     }
 
+    @PutMapping("/editfruit/{id}")
+    public ResponseEntity<String> editFruit(@PathVariable Long id, @RequestBody Fruit editedFruit) {
+        Optional<Fruit> optionalSupplier = fruitRepository.findById(id);
+
+        if (optionalSupplier.isPresent()) {
+            Fruit existingFruit = optionalSupplier.get();
+
+
+            existingFruit.setName(editedFruit.getName());
+            existingFruit.setPrice(editedFruit.getPrice());
+            existingFruit.setSupplier(editedFruit.getSupplier());
+
+            fruitRepository.save(existingFruit);
+
+            return ResponseEntity.ok("Szállító szerkesztve az azonosító alapján: " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A megadott azonosítóval szállító nem található: " + id);
+        }
+    }
 }

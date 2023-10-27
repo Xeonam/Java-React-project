@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -46,6 +47,23 @@ public class SupplierController {
             return ResponseEntity.ok("Supplier deleted, id:  " + id);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no supplier with the id: " + id);}
+    }
+
+    @PutMapping("/editsupplier/{id}")
+    public ResponseEntity<String> editSupplier(@PathVariable Long id, @RequestBody SupplierDto editedSupplierDto) {
+        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
+
+        if (optionalSupplier.isPresent()) {
+            Supplier existingSupplier = optionalSupplier.get();
+
+            existingSupplier.setName(editedSupplierDto.getName());
+            existingSupplier.setAddress(editedSupplierDto.getAddress());
+            supplierRepository.save(existingSupplier);
+
+            return ResponseEntity.ok("Szállító szerkesztve az azonosító alapján: " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A megadott azonosítóval szállító nem található: " + id);
+        }
     }
 
 }
