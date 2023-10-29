@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { DefaultNavbar, FruitTable } from './components';
+import { DefaultNavbar, FruitTable, Hero } from './components';
 
 function App() {
   
@@ -9,6 +9,7 @@ function App() {
     <div>
       <DefaultNavbar></DefaultNavbar>
       <Routes>
+        <Route path='' element={<Hero/>}/>
         <Route path='/fruits' element={<FruitTable/>} />
       </Routes>
 
