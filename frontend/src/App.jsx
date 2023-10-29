@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { FruitTable } from './components';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { DefaultNavbar, FruitTable } from './components';
 
 function App() {
   
 
   return (
     <div>
-      Basic project
-      <FruitTable></FruitTable>
+      <DefaultNavbar></DefaultNavbar>
+      <Routes>
+        <Route path='/fruits' element={<FruitTable/>} />
+      </Routes>
 
     </div>
   );
