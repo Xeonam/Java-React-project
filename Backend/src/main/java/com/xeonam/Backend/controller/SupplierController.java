@@ -15,7 +15,7 @@ import java.util.List;
 
 
 
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class SupplierController {
     private final SupplierService supplierService;

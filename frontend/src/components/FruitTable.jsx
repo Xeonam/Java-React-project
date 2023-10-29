@@ -4,7 +4,7 @@ import { Table } from "flowbite-react";
 
 function FruitTable() {
   const { isPending, error, data } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["fruitsData"],
     queryFn: () =>
       fetch("http://localhost:8080/fruits").then((res) => res.json()),
   });
@@ -35,7 +35,7 @@ function FruitTable() {
       </button>
 
       {data && (
-        <Table hoverable>
+        <Table hoverable className="text-center">
           <Table.Head>
             <Table.HeadCell>Fruit id</Table.HeadCell>
             <Table.HeadCell>Fruit name</Table.HeadCell>
@@ -55,7 +55,7 @@ function FruitTable() {
                 <Table.Cell>{fruit.name}</Table.Cell>
                 <Table.Cell>{fruit.price}</Table.Cell>
                 <Table.Cell>{fruit.supplier.id}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell >
                   <button
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
