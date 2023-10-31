@@ -1,17 +1,29 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table } from "flowbite-react";
+import { deleteFruit, fetchFruits } from "../api/fruits";
 
 function FruitTable() {
-  const { isPending, error, data } = useQuery({
-    queryKey: ["fruitsData"],
-    queryFn: () =>
-      fetch("http://localhost:8080/fruits").then((res) => res.json()),
+  const queryClient = useQueryClient();
+
+  const {isLoading, isError, data, error} = useQuery({
+    queryKey : ["fruits"],
+    queryFn: fetchFruits
   });
 
-  if (isPending) return "Loading...";
+  const deleteFruitMutation = useMutation({
+    mutationFn: deleteFruit, 
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['fruits']});
+    },
+  })
 
-  if (error) return "An error has occurred: " + error.message;
+  const handleDelete = (id) => {
+    deleteFruitMutation.mutate(id)
+  }
+
+  if (isLoading) return "Loading...";
+  if (isError) return "An error has occurred: " + error.message;
 
   return (
     <div className="m-3">
@@ -55,10 +67,12 @@ function FruitTable() {
                 <Table.Cell>{fruit.name}</Table.Cell>
                 <Table.Cell>{fruit.price}</Table.Cell>
                 <Table.Cell>{fruit.supplier.id}</Table.Cell>
-                <Table.Cell >
+                <Table.Cell>
                   <button
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    onClick={() => handleDelete(fruit.id)}
+
                   >
                     Delete
                   </button>
