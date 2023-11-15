@@ -2,25 +2,26 @@ import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table } from "flowbite-react";
 import { deleteFruit, fetchFruits } from "../api/fruits";
+import { NavLink } from "react-router-dom";
 
 function FruitTable() {
   const queryClient = useQueryClient();
 
-  const {isLoading, isError, data, error} = useQuery({
-    queryKey : ["fruits"],
-    queryFn: fetchFruits
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ["fruits"],
+    queryFn: fetchFruits,
   });
 
   const deleteFruitMutation = useMutation({
-    mutationFn: deleteFruit, 
+    mutationFn: deleteFruit,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits']});
+      queryClient.invalidateQueries({ queryKey: ["fruits"] });
     },
-  })
+  });
 
   const handleDelete = (id) => {
-    deleteFruitMutation.mutate(id)
-  }
+    deleteFruitMutation.mutate(id);
+  };
 
   if (isLoading) return "Loading...";
   if (isError) return "An error has occurred: " + error.message;
@@ -39,12 +40,14 @@ function FruitTable() {
         changes and see them in action in real-time!
       </p>
 
-      <button
-        type="button"
-        className="focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
-      >
-        Add new Fruit
-      </button>
+      <NavLink to="/add-fruit">
+        <button
+          type="button"
+          className="focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
+        >
+          Add new Fruit
+        </button>
+      </NavLink>
 
       {data && (
         <Table hoverable className="text-center">
@@ -72,7 +75,6 @@ function FruitTable() {
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                     onClick={() => handleDelete(fruit.id)}
-
                   >
                     Delete
                   </button>
