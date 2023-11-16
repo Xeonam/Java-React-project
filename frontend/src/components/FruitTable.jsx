@@ -40,7 +40,7 @@ function FruitTable() {
         <NavLink to="/add-fruit">
           <button
             type="button"
-            className="mx-20 focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:focus:ring-yellow-900"
+            className="mx-32 focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:focus:ring-yellow-900"
           >
             Add new Fruit
           </button>
@@ -68,7 +68,7 @@ function FruitTable() {
                 <Table.Cell>{fruit.name}</Table.Cell>
                 <Table.Cell>{fruit.price}</Table.Cell>
                 <Table.Cell>{fruit.supplier.id}</Table.Cell>
-                <Table.Cell style={{ width: '300px' }}>
+                <Table.Cell className="w-1/4">
                   <button
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"

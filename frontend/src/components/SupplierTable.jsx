@@ -27,24 +27,22 @@ function SupplierTable() {
   if (error) return "An error has occurred: " + error.message;
   return (
     <div className="m-3">
-      <h2 className="text-4xl font-extrabold dark:text-white">
+      <h2 className="text-4xl font-extrabold dark:text-white my-5">
         Suppplier CRUD Site
       </h2>
-      <p className="my-4 text-lg text-gray-500">
-        Welcome to the Supplier CRUD (Create, Read, Update, Delete) site. Here,
-        you can manage a list of suppliers and their details.
-      </p>
       <p className="mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
         Explore, add, modify, or delete supplier entries effortlessly. Make your
         changes and see them in action in real-time!
       </p>
 
-      <button
-        type="button"
-        className="focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
-      >
-        Add new Supplier
-      </button>
+      <div className="flex justify-end h-full">
+          <button
+            type="button"
+            className="mx-32 focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:focus:ring-yellow-900"
+          >
+             Add new Supplier
+          </button>
+      </div>
 
       {data && (
         <Table hoverable className="text-center">
@@ -65,7 +63,7 @@ function SupplierTable() {
                 </Table.Cell>
                 <Table.Cell>{supplier.name}</Table.Cell>
                 <Table.Cell>{supplier.address}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell className="w-1/4">
                   <button
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
