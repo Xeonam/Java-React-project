@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchFruit, updateFruit } from "../api/fruits";
 import { fetchSuppliers } from "../api/suppliers";
+import { Link } from "react-router-dom";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -74,7 +75,7 @@ const EditFruit = () => {
               id: values.supplier,
             },
           };
-          
+
           updateFruit(fruitId, updatedFruit);
           queryClient.invalidateQueries({ queryKey: ["fruit"] });
 
@@ -140,6 +141,14 @@ const EditFruit = () => {
               >
                 Edit Fruit
               </button>
+              <Link to={"/fruits"}>
+                <button
+                  className="focus:outline-none text-white bg-[#ff7400] hover:bg-[#ffa700] active:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                  type="submit"
+                >
+                  Back to Fruits
+                </button>
+              </Link>
             </div>
             <Toaster richColors />
           </Form>
