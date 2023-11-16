@@ -1,6 +1,8 @@
 package com.xeonam.Backend.service;
 
+import com.xeonam.Backend.dto.FruitDto;
 import com.xeonam.Backend.dto.SupplierDto;
+import com.xeonam.Backend.model.Fruit;
 import com.xeonam.Backend.model.Supplier;
 import com.xeonam.Backend.repository.SupplierRepository;
 import org.modelmapper.ModelMapper;
@@ -61,5 +63,17 @@ public class SupplierServiceImpl implements SupplierService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Optional<SupplierDto> getSupplierById(Long id) {
+        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
+
+        if (optionalSupplier.isPresent()) {
+            SupplierDto supplierDto = modelMapper.map(optionalSupplier.get(), SupplierDto.class);
+            return Optional.of(supplierDto);
+        } else {
+            return Optional.empty();
+        }
     }
 }

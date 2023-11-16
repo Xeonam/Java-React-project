@@ -1,5 +1,6 @@
 package com.xeonam.Backend.controller;
 
+import com.xeonam.Backend.dto.FruitDto;
 import com.xeonam.Backend.dto.SupplierDto;
 import com.xeonam.Backend.model.Supplier;
 import com.xeonam.Backend.repository.SupplierRepository;
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -48,6 +49,17 @@ public class SupplierController {
     public ResponseEntity<String> editSupplier(@PathVariable Long id, @RequestBody SupplierDto editedSupplierDto) {
         if (supplierService.editSupplier(id, editedSupplierDto)) {
             return ResponseEntity.ok("Supplier edited, id: " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier not found with id: " + id);
+        }
+    }
+
+    @GetMapping("/supplier/{id}")
+    public ResponseEntity<?> getSupplierById(@PathVariable Long id) {
+        Optional<SupplierDto> supplierDto = supplierService.getSupplierById(id);
+
+        if (supplierDto.isPresent()) {
+            return ResponseEntity.ok(supplierDto.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier not found with id: " + id);
         }

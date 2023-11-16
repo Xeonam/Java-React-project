@@ -1,34 +1,44 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { fetchSupplier, updateSupplier } from "../api/suppliers";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useMutation } from "@tanstack/react-query";
 import { toast, Toaster } from "sonner";
 import { Card } from "flowbite-react";
-import { createSupplier } from "../api/suppliers";
 
-function AddSupplier() {
-  const createSupplierMutation = useMutation({
-    mutationFn: createSupplier,
+function EditSupplier() {
+  const params = useParams();
+  const queryClient = useQueryClient();
+
+  const {
+    isLoading: isLoadingSupplier,
+    isError: isErrorSupplier,
+    data: supplier,
+    error: supplierError,
+  } = useQuery({
+    queryKey: ["supplier"],
+    queryFn: () => fetchSupplier(params.id),
   });
 
-  const handleAddSupplier = (supplier) => {
-    createSupplierMutation.mutate({
-      ...supplier,
-    });
-  };
+  if (isLoadingSupplier) return "Loading...";
+  if (isErrorSupplier) return "An error has occurred: " + supplierError.message;
+
   return (
-    <div className="h-screen w-full grid place-items-center">
+    <div>
       <Formik
         initialValues={{
-          name: "",
-          address: "",
+          name: supplier.name,
+          address: supplier.address,
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Name is required"),
           address: Yup.string().required("Address is required"),
         })}
         onSubmit={(values, actions) => {
-          handleAddSupplier(values);
+          updateSupplier(params.id, values);
+          queryClient.invalidateQueries({ queryKey: ["supplier"] });
 
           actions.resetForm({
             values: {
@@ -37,7 +47,7 @@ function AddSupplier() {
             },
           });
 
-          toast.success("Added");
+          toast.success("Edited");
         }}
       >
         <Card className="">
@@ -71,7 +81,7 @@ function AddSupplier() {
                 className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 type="submit"
               >
-                Add Supplier
+                Edit Supplier
               </button>
             </div>
             <Toaster richColors />
@@ -82,4 +92,4 @@ function AddSupplier() {
   );
 }
 
-export default AddSupplier;
+export default EditSupplier;

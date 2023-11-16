@@ -74,10 +74,10 @@ const EditFruit = () => {
               id: values.supplier,
             },
           };
-          //handleEditFruit(fruitId, updatedFruit)
+          
           updateFruit(fruitId, updatedFruit);
           queryClient.invalidateQueries({ queryKey: ["fruit"] });
-          console.log("fa");
+
           toast.success("Edited!");
 
           actions.resetForm({

@@ -3,8 +3,9 @@ import DefaultNavbar from "./DefaultNavbar";
 import Hero from "./Hero";
 import SupplierTable from "./SupplierTable";
 import AddFruit from "./AddFruit";
-import EditFruit from "./EditFruit"
-import AddSupplier from './AddSupplier'
+import EditFruit from "./EditFruit";
+import AddSupplier from './AddSupplier';
+import EditSupplier from "./EditSupplier";
 
 export{
     FruitTable,
@@ -13,5 +14,6 @@ export{
     SupplierTable,
     AddFruit,
     EditFruit,
-    AddSupplier
+    AddSupplier,
+    EditSupplier
 };
