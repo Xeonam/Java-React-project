@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table } from "flowbite-react";
 import { deleteFruit, fetchFruits } from "../api/fruits";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function FruitTable() {
   const queryClient = useQueryClient();
@@ -78,12 +78,14 @@ function FruitTable() {
                   >
                     Delete
                   </button>
-                  <button
-                    type="button"
-                    className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
-                  >
-                    Edit
-                  </button>
+                  <Link to={`/edit-fruit/${fruit.id}`}>
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
+                    >
+                      Edit
+                    </button>
+                  </Link>
                 </Table.Cell>
               </Table.Row>
             ))}

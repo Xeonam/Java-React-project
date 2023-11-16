@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { DefaultNavbar, FruitTable, Hero, SupplierTable, AddFruit } from './components';
+import { DefaultNavbar, FruitTable, Hero, SupplierTable, AddFruit, EditFruit } from './components';
 
 function App() {
   
@@ -12,7 +12,8 @@ function App() {
         <Route path='' element={<Hero/>}/>
         <Route path='/fruits' element={<FruitTable/>} />
         <Route path='/suppliers' element={<SupplierTable/>} />
-        <Route path='/add-fruit' element={<AddFruit/>}/> 
+        <Route path='/add-fruit' element={<AddFruit/>}/>
+        <Route path='/edit-fruit/:id' element={<EditFruit/>}/>  
       </Routes>
 
     </div>

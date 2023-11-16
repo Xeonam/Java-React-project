@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -47,4 +48,16 @@ public class FruitController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fruit not found with id: " + id);
         }
     }
+
+    @GetMapping("/fruit/{id}")
+    public ResponseEntity<?> getFruitById(@PathVariable Long id) {
+        Optional<FruitDto> fruitDto = fruitService.getFruitById(id);
+
+        if (fruitDto.isPresent()) {
+            return ResponseEntity.ok(fruitDto.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fruit not found with id: " + id);
+        }
+    }
+
 }

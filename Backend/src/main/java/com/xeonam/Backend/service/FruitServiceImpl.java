@@ -63,4 +63,16 @@ public class FruitServiceImpl implements FruitService{
         }
         return false;
     }
+
+    @Override
+    public Optional<FruitDto> getFruitById(Long id) {
+        Optional<Fruit> optionalFruit = fruitRepository.findById(id);
+
+        if (optionalFruit.isPresent()) {
+            FruitDto fruitDto = modelMapper.map(optionalFruit.get(), FruitDto.class);
+            return Optional.of(fruitDto);
+        } else {
+            return Optional.empty();
+        }
+    }
 }
