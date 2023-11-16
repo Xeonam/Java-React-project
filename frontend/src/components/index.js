@@ -6,6 +6,7 @@ import AddFruit from "./AddFruit";
 import EditFruit from "./EditFruit";
 import AddSupplier from './AddSupplier';
 import EditSupplier from "./EditSupplier";
+import PreviewFruit from "./PreviewFruit";
 
 export{
     FruitTable,
@@ -15,5 +16,6 @@ export{
     AddFruit,
     EditFruit,
     AddSupplier,
-    EditSupplier
+    EditSupplier,
+    PreviewFruit
 };
