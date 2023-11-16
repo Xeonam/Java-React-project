@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { DefaultNavbar, FruitTable, Hero, SupplierTable, AddFruit, EditFruit, AddSupplier, EditSupplier } from './components';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { DefaultNavbar, FruitTable, Hero, SupplierTable, AddFruit, EditFruit, AddSupplier, EditSupplier, PreviewSupplier } from './components';
 import PreviewFruit from './components/PreviewFruit';
 
 function App() {
@@ -17,7 +17,8 @@ function App() {
         <Route path='/edit-fruit/:id' element={<EditFruit/>}/>  
         <Route path='/add-supplier' element={<AddSupplier/>}/>  
         <Route path='/edit-supplier/:id' element={<EditSupplier/>}/>
-        <Route path='/fruit/:id' element={<PreviewFruit/>}/>    
+        <Route path='/fruit/:id' element={<PreviewFruit/>}/>
+        <Route path='/supplier/:id' element={<PreviewSupplier/>}/>     
       </Routes>
 
     </div>

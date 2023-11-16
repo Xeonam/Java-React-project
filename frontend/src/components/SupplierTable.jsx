@@ -82,6 +82,14 @@ function SupplierTable() {
                       Edit
                     </button>
                   </Link>
+                  <Link to={`/supplier/${supplier.id}`}>
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
+                    >
+                      Preview
+                    </button>
+                  </Link>
                 </Table.Cell>
               </Table.Row>
             ))}
