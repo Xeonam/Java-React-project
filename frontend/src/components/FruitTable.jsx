@@ -28,26 +28,24 @@ function FruitTable() {
 
   return (
     <div className="m-3">
-      <h2 className="text-4xl font-extrabold dark:text-white">
+      <h2 className="text-4xl font-extrabold dark:text-white my-5">
         Fruit CRUD Site
       </h2>
-      <p className="my-4 text-lg text-gray-500">
-        Welcome to the fruit CRUD (Create, Read, Update, Delete) site. Here, you
-        can manage a list of fruits and their details.
-      </p>
       <p className="mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-        Explore, add, modify, or delete fruit entries effortlessly. Make your
+        Explore, add, modify or delete fruit entries effortlessly. Make your
         changes and see them in action in real-time!
       </p>
 
-      <NavLink to="/add-fruit">
-        <button
-          type="button"
-          className="focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
-        >
-          Add new Fruit
-        </button>
-      </NavLink>
+      <div className="flex justify-end h-full">
+        <NavLink to="/add-fruit">
+          <button
+            type="button"
+            className="mx-20 focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:focus:ring-yellow-900"
+          >
+            Add new Fruit
+          </button>
+        </NavLink>
+      </div>
 
       {data && (
         <Table hoverable className="text-center">
@@ -70,7 +68,7 @@ function FruitTable() {
                 <Table.Cell>{fruit.name}</Table.Cell>
                 <Table.Cell>{fruit.price}</Table.Cell>
                 <Table.Cell>{fruit.supplier.id}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell style={{ width: '300px' }}>
                   <button
                     type="button"
                     className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
