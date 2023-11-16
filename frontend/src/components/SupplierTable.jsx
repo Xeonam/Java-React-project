@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table } from "flowbite-react";
 import { deleteSupplier, fetchSuppliers } from "../api/suppliers";
+import { NavLink } from "react-router-dom";
 
 function SupplierTable() {
   const queryClient = useQueryClient();
@@ -36,12 +37,14 @@ function SupplierTable() {
       </p>
 
       <div className="flex justify-end h-full">
+        <NavLink to="/add-supplier">
           <button
             type="button"
             className="mx-32 focus:outline-none text-white bg-green-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:focus:ring-yellow-900"
           >
-             Add new Supplier
+            Add new Supplier
           </button>
+        </NavLink>
       </div>
 
       {data && (
