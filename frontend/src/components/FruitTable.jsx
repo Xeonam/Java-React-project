@@ -32,7 +32,7 @@ function FruitTable() {
         Fruit CRUD Site
       </h2>
       <p className="mb-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-        Explore, add, modify or delete fruit entries effortlessly. Make your
+        Explore, add, modify, or delete fruit entries effortlessly. Make your
         changes and see them in action in real-time!
       </p>
 
