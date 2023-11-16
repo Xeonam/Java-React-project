@@ -26,7 +26,7 @@ function EditSupplier() {
   if (isErrorSupplier) return "An error has occurred: " + supplierError.message;
 
   return (
-    <div>
+    <div className="h-screen w-full grid place-items-center">
       <Formik
         initialValues={{
           name: supplier.name,
@@ -50,7 +50,7 @@ function EditSupplier() {
           toast.success("Edited");
         }}
       >
-        <Card className="">
+        <Card>
           <Form className="grid space-y-3">
             <Field
               name="name"
@@ -72,13 +72,13 @@ function EditSupplier() {
             ></Field>
             <ErrorMessage
               component="label"
-              name="price"
+              name="address"
               className="text-red-600"
             />
 
             <div className="grid justify-center">
               <button
-                className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="focus:outline-none text-white bg-green-700 hover:bg-green-800 active:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 type="submit"
               >
                 Edit Supplier
