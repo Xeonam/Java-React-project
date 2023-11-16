@@ -5,7 +5,7 @@ export async function fetchSuppliers() {
 
 export async function deleteSupplier(id) {
   const response = await fetch(`http://localhost:8080/delete-supplier/${id}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
   return response;
 }
@@ -14,9 +14,9 @@ export async function createSupplier(newSupplier) {
   const response = await fetch("http://localhost:8080/add-supplier", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(newSupplier),
+    body: JSON.stringify(newSupplier)
   });
   return response;
 }
@@ -25,9 +25,9 @@ export async function updateSupplier(id, updatedSupplier) {
   const response = await fetch(`http://localhost:8080/edit-supplier/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(updatedSupplier),
+    body: JSON.stringify(updatedSupplier)
   });
 
   return response;

@@ -31,7 +31,7 @@ const EditFruit = () => {
     error: suppliersError,
   } = useQuery({
     queryKey: ["suppliersData"],
-    queryFn: fetchSuppliers,
+    queryFn: fetchSuppliers
   });
 
   if (isLoadingFruit) return "Loading...";

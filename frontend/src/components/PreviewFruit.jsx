@@ -13,7 +13,7 @@ function PreviewFruit() {
     error: fruitError,
   } = useQuery({
     queryKey: ["fruit"],
-    queryFn: () => fetchFruit(params.id),
+    queryFn: () => fetchFruit(params.id)
   });
 
   if (isLoadingFruit) return "Loading...";
