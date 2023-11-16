@@ -8,7 +8,7 @@ function DefaultNavbar() {
 
   return (
     <div className="flex justify-between items-center h-16 mx-auto px-4 bg-blue-900 text-[#00df9a] text-3xl">
-      <NavLink to="/" className="w-full font-bold">
+      <NavLink to="/" className="w-10 font-bold">
         <h1><GiFruitBowl /></h1>
       </NavLink>
       <ul className="flex">
